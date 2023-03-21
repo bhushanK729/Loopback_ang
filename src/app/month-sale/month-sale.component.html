@@ -1,0 +1,23 @@
+<div style="margin: 40px;">
+    <!-- Product sale month-year wise listing started -->
+    <table class="table" style="margin-top: 20px; float: right;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Year-Month</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr *ngIf="sales.length == 0">
+                <td colspan="6" style="text-align: center;">Data not found.</td>
+            </tr>
+            <tr *ngFor="let sale of data, index as j">
+                <th scope="row">{{j+1}}</th>
+                <td>{{sale.sale_date}}</td>
+                <td>{{sale.total_price}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Product sale month-year wise listing started -->
+</div>

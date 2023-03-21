@@ -1,0 +1,86 @@
+<div style="margin: 40px;">
+    <!--  Add button to insert product -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">Add
+        Product</button>
+    <!-- Product listing started -->    
+    <table class="table" style="margin-top: 20px; float: right;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr *ngIf="products.length == 0">
+                <td colspan="4" style="text-align: center;">Data not found.</td>
+            </tr>
+            <tr *ngFor="let product of products, index as j">
+                <th scope="row">{{j+1}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Product listing end -->  
+    <!-- Product form modal started -->  
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="productForm" (ngSubmit)="submit()" class="forms-sample">
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-3 col-form-label">Name
+                                <span style="color: red;">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" formControlName="productName"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f['productName'].errors }" />
+                                <div *ngIf="isSubmitted && f['productName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['productName'].errors?.['required']">Product name is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-3 col-form-label">Description
+                                <span style="color: red;">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" formControlName="productDesc"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f['productDesc'].errors }" />
+                                <div *ngIf="isSubmitted && f['productDesc'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['productDesc'].errors?.['required']">Product description is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-3 col-form-label">Price
+                                <span style="color: red;">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" formControlName="productPrice"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f['productPrice'].errors }" />
+                                <div *ngIf="isSubmitted && f['productPrice'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['productPrice'].errors?.['required']">Product price is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button #closeModal type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product form modal end -->
+</div>
